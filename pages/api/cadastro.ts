@@ -14,8 +14,21 @@ const endpointCadastro = (req: NextApiRequest, res : NextApiResponse<RespostaPad
             return res.status(400).json({erro: 'Nome inválido'});
         }
 
+        if(!usuario.email || usuario.email.length <5
+            || !usuario.email.includes('@')
+            || !usuario.email.includes('.')){
+                return res.status(400).json({erro : 'E-mail inválido'});
+            }
         
+        if(!usuario.senha || usuario.senha.length <4){
+            return res.status(400).json({erro: 'Senha inválida'});
+        }
+
+        return res.status(200).json({msg : 'Dados corretos'});
 
     }
     return res.status(405).json({erro: 'Método informado não é válido'});
 }
+
+
+export default endpointCadastro;
