@@ -1,9 +1,12 @@
 import type {NextApiRequest,NextApiResponse} from 'next';
 import type {RespostaPadraoMsg} from '../../types/RespostaPadraoMsg';
 import type {CadastroRequisicao} from '../../types/CadastroRequisicao';
+import {UsuarioModel} from '../../models/UsuarioModel'
 
 
-const endpointCadastro = (req: NextApiRequest, res : NextApiResponse<RespostaPadraoMsg>) => {
+const endpointCadastro = 
+
+   async (req: NextApiRequest, res : NextApiResponse<RespostaPadraoMsg>) => {
 
     if(req.method === 'POST'){
 
@@ -24,7 +27,9 @@ const endpointCadastro = (req: NextApiRequest, res : NextApiResponse<RespostaPad
             return res.status(400).json({erro: 'Senha inválida'});
         }
 
-        return res.status(200).json({msg : 'Dados corretos'});
+        //salvar no banco de dados
+        await UsuarioModel.create(usuario);
+        return res.status(200).json({msg : 'Usuário criado com sucesso'});
 
     }
     return res.status(405).json({erro: 'Método informado não é válido'});
