@@ -14,7 +14,7 @@ if (mongoose.connections[0].readyState){
 // já que não está conectado, vamos conectar
 //obter variável de ambiente preenchida do env
 const {DB_CONEXAO_STRING} = process.env;
-
+console.log(DB_CONEXAO_STRING)
 //se  a env estiver, abortar o uso do sistema e avisar o programador
 if(!DB_CONEXAO_STRING){
     return res.status(500).json({ erro: 'ENV de configuração do banco, não informado'});
